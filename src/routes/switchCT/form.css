@@ -9,7 +9,7 @@ body {
     display: flex;
     flex-direction: column;
 }
-input[type=text], textarea, select {
+input[type=text], textarea, select, .input-inline {
     width: 99%;
     height: 30px;
     border: 1px solid #ccc;
@@ -19,6 +19,13 @@ input[type=text], textarea, select {
     font-size: 14px;
     padding-left: 10px;
 }
+
+.selectMask {
+    height: 25px;
+    width: 50px ;
+    margin-top: 0;
+}
+
 button{ 
     width: auto;
     float: right;

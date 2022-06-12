@@ -38,3 +38,15 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.input-inline {
+  display: flex;
+  color: #282c34;
+  align-items: center;
+}
+
+.ipSystem {
+  width: 50px;
+  font-family: monospace;
+  font-size: 14px;
+}
