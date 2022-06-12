@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-export default function() {
+export default function FormNokiaSar() {
   const [datos, setDatos] = useState({
     sitio: '',
     hostname: '',
