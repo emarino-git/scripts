@@ -10,8 +10,9 @@ function App() {
         }}
       >
         <div className="menu" >
-            <Link className="App-link boton" to="/nokia">Nokia</Link>
-            <Link className="App-link boton" to="/switch">Switches de CT</Link>
+            <Link className="App-link boton" to="/nokia">Nokia SAR</Link>
+            <Link className="App-link boton" to="/switch-CT-IE2000">Switches de CT Cisco</Link>
+            <Link className="App-link boton" to="/switch-CT-SAS7210">Switches de CT Nokia</Link>
         </div>        
       </nav>
       <Outlet />
