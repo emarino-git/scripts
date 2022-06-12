@@ -13,11 +13,13 @@ export default function FormNokiaSar() {
     ipSystem: ''
 })
 
-
+console.log(datos.selMask)
 
 let ipGW = ''
 
-if (datos.selMask = 25 && datos.ipAddress4<126) {ipGW=126} else {ipGW=254}
+if (datos.selMask === '24' ) {ipGW=254} 
+else if (datos.ipAddress4<126) {ipGW=126}
+else {ipGW=254} 
 
 
 const handleInputChange = (event) => {
