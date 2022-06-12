@@ -375,7 +375,7 @@ newLink.click();
               />
               <div>.</div>
               <div>/</div>
-              <select defaultValue={24} className='selectMask' name="selMask" onChange={handleInputChange}>
+              <select defaultValue={25} className='selectMask' name="selMask" onChange={handleInputChange}>
                   <option value="24" >24</option>
                   <option value="25">25</option>
               </select>
