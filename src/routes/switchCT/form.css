@@ -9,7 +9,7 @@ body {
     display: flex;
     flex-direction: column;
 }
-input[type=text], textarea, select, .input-inline {
+input[type=text], input[type=search], textarea, select, .input-inline {
     width: 99%;
     height: 30px;
     border: 1px solid #ccc;
@@ -18,6 +18,17 @@ input[type=text], textarea, select, .input-inline {
     font-family: monospace;
     font-size: 14px;
     padding-left: 10px;
+}
+
+input[type=number] {
+    width: 30px;
+    text-align: center;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    margin: 0;
+    -webkit-appearance: none;
 }
 
 .selectMask {

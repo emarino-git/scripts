@@ -183,16 +183,14 @@ configure system name ${hostname}
 
 configure bof
 
-address          ${ipAddress1}.${ipAddress2}.${ipAddress3}.${ipAddress4}/${mask} active
-static-route     ${staticRoute} next-hop ${ipAddress1}.${ipAddress2}.${ipAddress3}.${ipGateway}
-static-route     ${staticRoute} next-hop ${ipAddress1}.${ipAddress2}.${ipAddress3}.${ipGateway}
-static-route     ${staticRoute} next-hop ${ipAddress1}.${ipAddress2}.${ipAddress3}.${ipGateway}
+address ${ipAddress1}.${ipAddress2}.${ipAddress3}.${ipAddress4}/${mask} active
+static-route ${staticRoute} next-hop ${ipAddress1}.${ipAddress2}.${ipAddress3}.${ipGateway}
+static-route ${staticRoute} next-hop ${ipAddress1}.${ipAddress2}.${ipAddress3}.${ipGateway}
+static-route ${staticRoute} next-hop ${ipAddress1}.${ipAddress2}.${ipAddress3}.${ipGateway}
 
 persist one
 
 exit
-
-3) Configuracion de Placas y MDA
 
 configure card 1
 card-type "iom-sar"
@@ -204,7 +202,6 @@ mda-type a8-1gb-sfp
 no shutdown
 exit
 
-4) Configurar System Interface
 
 configure router interface "system" address 10.77.181.${ipSystem}/32
 configure router interface "system" no shutdown
@@ -307,7 +304,6 @@ newLink.click();
 
   }
 
-  
 
   return(
     <main>
@@ -323,9 +319,9 @@ newLink.click();
       <form className='container' onSubmit={saveFile}>
         <div>
           <input 
-            type='text'
-            placeholder='Sitio'
-            name='sitio'
+            type="text" 
+            name="sitio" 
+            placeholder="Ingrese el Sitio"
             onChange={handleInputChange}
           />
           {nuevoNokiaIsChecked ?
@@ -385,7 +381,7 @@ newLink.click();
             </div>
             <input 
               type='text'
-              placeholder='Rutas estatica: pendiente'
+              placeholder='Rutas estaticas: pendiente'
               name='staticRoute'
               onChange={handleInputChange}
             />
