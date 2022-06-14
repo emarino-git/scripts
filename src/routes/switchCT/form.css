@@ -20,6 +20,7 @@ input[type=text], input[type=search], textarea, select, .input-inline {
     padding-left: 10px;
 }
 
+
 input[type=number] {
     width: 30px;
     text-align: center;

@@ -2,6 +2,7 @@ import { useState } from 'react'
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import { listadoSitios } from '../data/Sitios'
+import Checkbox from '@mui/material/Checkbox';
 
 
 export default function FormNokiaSar() {
@@ -14,7 +15,6 @@ export default function FormNokiaSar() {
     ipAddress3: '',
     ipAddress4: '',
     selMask: '',
-    staticRoute: '',
     ipSystem: ''
   })
 
@@ -26,6 +26,13 @@ export default function FormNokiaSar() {
 
   const [sitios, setSitio] = useState(listadoSitios[0])
 
+  const rutas = [false,false,false]
+
+  // Rutas estáticas
+  const [agregarRuta1, setagregarRuta1] = useState(rutas[0])
+  const [agregarRuta142, setagregarRuta142] = useState(rutas[1])
+  const [agregarRuta200, setagregarRuta200] = useState(rutas[2])
+
   // Logica para carga de Variables por usuario
 
   const handleInputChange = (event) => {
@@ -34,6 +41,8 @@ export default function FormNokiaSar() {
         [event.target.name] : event.target.value
     })
   }
+
+  const ruta1 = false, ruta142 = false, ruta200 = false  
 
   // Logica para elegir que vista del usuario
 
@@ -66,7 +75,6 @@ export default function FormNokiaSar() {
     const ipAddress3 = datos.ipAddress3
     const ipAddress4 = datos.ipAddress4
     const mask = datos.selMask
-    const staticRoute = datos.staticRoute
     const ipGateway = ipGW
     const ipSystem = datos.ipSystem
 
@@ -190,9 +198,10 @@ configure system name MUX-${hostname}
 configure bof
 
 address ${ipAddress1}.${ipAddress2}.${ipAddress3}.${ipAddress4}/${mask} active
-static-route ${staticRoute} next-hop ${ipAddress1}.${ipAddress2}.${ipAddress3}.${ipGateway}
-static-route ${staticRoute} next-hop ${ipAddress1}.${ipAddress2}.${ipAddress3}.${ipGateway}
-static-route ${staticRoute} next-hop ${ipAddress1}.${ipAddress2}.${ipAddress3}.${ipGateway}
+
+${(agregarRuta1)?`static-route 192.168.0.0/16 next-hop ${ipAddress1}.${ipAddress2}.${ipAddress3}.${ipGateway}`:""}
+${(agregarRuta142)?`static-route 10.142.0.0/16 next-hop ${ipAddress1}.${ipAddress2}.${ipAddress3}.${ipGateway}`:""}
+${(agregarRuta200)?`static-route 10.200.0.0/16 next-hop ${ipAddress1}.${ipAddress2}.${ipAddress3}.${ipGateway}`:""}
 
 persist one
 
@@ -324,6 +333,7 @@ newLink.click();
       </div>
       <form className='container' onSubmit={saveFile}>
         <div>
+
           <Autocomplete 
             disablePortal
             options={listadoSitios}
@@ -333,25 +343,11 @@ newLink.click();
             }}
             renderInput={(params) => <TextField {...params} label="Sitio" />}
           />
-          {/* <input 
-            type="text" 
-            name="sitio" 
-            placeholder="Ingrese el Sitio"
-            onChange={handleInputChange}
-          /> */}
           {nuevoNokiaIsChecked ?
           <div>
-            <div className='input-inline' key={listadoSitios.value} >
+            <div className='input-inline' >
             HOSTNAME: MUX-{sitios.hostname}
             </div>
-            
-            {/* <TextField 
-              // type='text'
-              variant="outlined"
-              label='HOSTNAME'
-              name='hostname'
-              onChange={handleInputChange}
-            /> */}
             <div className='input-inline' >
               <div>IP Address:</div>
               <input 
@@ -399,12 +395,24 @@ newLink.click();
             <div className='input-inline'>
               IP Gateway: {datos.ipAddress1}.{datos.ipAddress2}.{datos.ipAddress3}.{ipGW}
             </div>
-            <input 
+            {/* <input 
               type='text'
               placeholder='Rutas estaticas: pendiente'
               name='staticRoute'
               onChange={handleInputChange}
-            />
+            /> */}
+            <div className='input-inline'>
+              Rutas estáticas: 
+              <Checkbox onChange={(event, agregarRuta1) => {
+                  setagregarRuta1(agregarRuta1);
+                }} {...ruta1} /> 1
+              <Checkbox onChange={(event, agregarRuta142) => {
+                  setagregarRuta142(agregarRuta142);
+                }} {...ruta142} /> 142
+              <Checkbox onChange={(event, agregarRuta200) => {
+                  setagregarRuta200(agregarRuta200);
+                }} {...ruta200} /> 200
+            </div>
             <div className='input-inline'>
               <div>IP System: 10.77.181.</div>
               <input 
