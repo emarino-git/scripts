@@ -1,9 +1,14 @@
 import { useState } from 'react'
+import TextField from '@mui/material/TextField';
+import Autocomplete from '@mui/material/Autocomplete';
+import { listadoSitios } from '../data/Sitios'
+
 
 export default function FormNokiaSar() {
+
+  // Definiciones de Variables
+
   const [datos, setDatos] = useState({
-    sitio: '',
-    hostname: '',
     ipAddress1: '',
     ipAddress2: '',
     ipAddress3: '',
@@ -11,25 +16,26 @@ export default function FormNokiaSar() {
     selMask: '',
     staticRoute: '',
     ipSystem: ''
-})
-
-console.log(datos.selMask)
-
-let ipGW = ''
-
-if (datos.selMask === '24' ) {ipGW=254} 
-else if (datos.ipAddress4<126) {ipGW=126}
-else {ipGW=254} 
-
-
-const handleInputChange = (event) => {
-  setDatos({
-      ...datos,
-      [event.target.name] : event.target.value
   })
-}
 
+  let ipGW = ''
 
+  if (datos.selMask === '24' ) {ipGW=254} 
+  else if (datos.ipAddress4<126) {ipGW=126}
+  else {ipGW=254}
+
+  const [sitios, setSitio] = useState(listadoSitios[0])
+
+  // Logica para carga de Variables por usuario
+
+  const handleInputChange = (event) => {
+    setDatos({
+        ...datos,
+        [event.target.name] : event.target.value
+    })
+  }
+
+  // Logica para elegir que vista del usuario
 
   const [nuevoNokiaIsChecked, setNuevoNokiaIsChecked] = useState(false);
   const nuevoNokia = () => {
@@ -51,23 +57,23 @@ const handleInputChange = (event) => {
     setsDPIsChecked(!sDPIsChecked);
   };
   
-const saveFile = (event) => {
-  event.preventDefault()
-  const sitio = datos.sitio
-  const hostname = datos.hostname
-  const ipAddress1 = datos.ipAddress1
-  const ipAddress2 = datos.ipAddress2
-  const ipAddress3 = datos.ipAddress3
-  const ipAddress4 = datos.ipAddress4
-  const mask = datos.selMask
-  const staticRoute = datos.staticRoute
-  const ipGateway = ipGW
-  const ipSystem = datos.ipSystem
+  const saveFile = (event) => {
+    event.preventDefault()
+    const sitio = sitios.label
+    const hostname = sitios.hostname
+    const ipAddress1 = datos.ipAddress1
+    const ipAddress2 = datos.ipAddress2
+    const ipAddress3 = datos.ipAddress3
+    const ipAddress4 = datos.ipAddress4
+    const mask = datos.selMask
+    const staticRoute = datos.staticRoute
+    const ipGateway = ipGW
+    const ipSystem = datos.ipSystem
 
-  if(nuevoNokiaIsChecked) {
+    if(nuevoNokiaIsChecked) {
 
 
-    let scriptNuevoNokia = 
+      let scriptNuevoNokia = 
 `
 system 
 contact "Telecomunicaciones"
@@ -179,7 +185,7 @@ exit
 
 #--------------------------------------------------
 
-configure system name ${hostname}
+configure system name MUX-${hostname}
 
 configure bof
 
@@ -301,8 +307,8 @@ else {
 newLink.click(); 
 
 }
+}
 
-  }
 
 
   return(
@@ -318,20 +324,34 @@ newLink.click();
       </div>
       <form className='container' onSubmit={saveFile}>
         <div>
-          <input 
+          <Autocomplete 
+            disablePortal
+            options={listadoSitios}
+            name="sitio"
+            onChange={(event, newValue) => {
+              setSitio(newValue);
+            }}
+            renderInput={(params) => <TextField {...params} label="Sitio" />}
+          />
+          {/* <input 
             type="text" 
             name="sitio" 
             placeholder="Ingrese el Sitio"
             onChange={handleInputChange}
-          />
+          /> */}
           {nuevoNokiaIsChecked ?
           <div>
-            <input 
-              type='text'
-              placeholder='HOSTNAME'
+            <div className='input-inline' key={listadoSitios.value} >
+            HOSTNAME: MUX-{sitios.hostname}
+            </div>
+            
+            {/* <TextField 
+              // type='text'
+              variant="outlined"
+              label='HOSTNAME'
               name='hostname'
               onChange={handleInputChange}
-            />
+            /> */}
             <div className='input-inline' >
               <div>IP Address:</div>
               <input 
