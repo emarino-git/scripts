@@ -395,12 +395,6 @@ newLink.click();
             <div className='input-inline'>
               IP Gateway: {datos.ipAddress1}.{datos.ipAddress2}.{datos.ipAddress3}.{ipGW}
             </div>
-            {/* <input 
-              type='text'
-              placeholder='Rutas estaticas: pendiente'
-              name='staticRoute'
-              onChange={handleInputChange}
-            /> */}
             <div className='input-inline'>
               Rutas estáticas: 
               <Checkbox onChange={(event, agregarRuta1) => {
