@@ -465,6 +465,7 @@ bof save
                             <option value="36">MGMT: 136 RTU:36</option>
                             <option value="37">MGMT: 137 RTU:37</option>
                             <option value="38">MGMT: 138 RTU:38</option>
+                            <option value="39">MGMT: 139 RTU:39</option>
                         </select>
                     </div>
                     <button type='submit'>Descargar SCRIPT</button>
